@@ -1,4 +1,4 @@
-export synthaxDB = {
+synthaxDB = {
   "events": [
     "join",
     "quit",
@@ -441,3 +441,4 @@ export synthaxDB = {
     "days"
   ]
 }
+module.exports = synthaxDB;
