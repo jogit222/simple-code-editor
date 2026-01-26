@@ -74,27 +74,6 @@
         
         <textarea id="input-area" class="editor-style" spellcheck="false" placeholder="Type 'color' to see the effect..."></textarea>
     </div>
-
-    <script>
-        const input = document.getElementById('input-area');
-        const visual = document.getElementById('visual-layer');
-
-        input.addEventListener('input', () => {
-            let text = input.value;
-
-            // Simple JS logic: Color the word "color" or "js"
-            // You can change this regex to target any specific pattern
-            const highlightedText = text.replace(/(color|js|important)/gi, (match) => {
-                return `<span class="colored-text">${match}</span>`;
-            });
-
-            visual.innerHTML = highlightedText;
-        });
-
-        // Sync scrolling
-        input.addEventListener('scroll', () => {
-            visual.scrollTop = input.scrollTop;
-        });
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
