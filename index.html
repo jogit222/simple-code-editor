@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS Text Highlighter</title>
+    <style>
+        :root {
+            --bg: #0f0f0f;
+            --sidebar: #1a1a1a;
+            --highlight: #00ffcc;
+        }
+
+        body { margin: 0; background: var(--bg); color: white; font-family: 'Courier New', monospace; display: flex; height: 100vh; }
+
+        /* Sidebar */
+        .sidebar { width: 80px; background: var(--sidebar); display: flex; flex-direction: column; align-items: center; padding-top: 20px; border-right: 1px solid #333; z-index: 10; }
+        .sidebar button { background: #333; color: #aaa; border: none; margin-bottom: 10px; padding: 10px; cursor: pointer; border-radius: 4px; font-size: 10px; width: 60px; }
+        .sidebar button:hover { background: #444; color: white; }
+
+        /* Editor Container */
+        .container { position: relative; flex-grow: 1; overflow: hidden; }
+
+        /* Shared styling for both elements to ensure alignment */
+        .editor-style {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            padding: 40px;
+            font-size: 20px;
+            line-height: 1.5;
+            font-family: inherit;
+            box-sizing: border-box;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            margin: 0;
+            border: none;
+        }
+
+        /* The actual typing area */
+        #input-area {
+            background: transparent;
+            color: transparent; /* Hide the actual text */
+            caret-color: white; /* Show only the blinking cursor */
+            z-index: 2;
+            outline: none;
+            resize: none;
+        }
+
+        /* The visual layer underneath */
+        #visual-layer {
+            background: var(--bg);
+            color: #666; /* Default text color */
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        /* The JS-driven color class */
+        .colored-text {
+            color: var(--highlight);
+            text-shadow: 0 0 8px var(--highlight);
+        }
+    </style>
+</head>
+<body>
+
+    <aside class="sidebar">
+        <button>CHECK</button>
+        <button>SAVE</button>
+        <button>DL</button>
+    </aside>
+
+    <div class="container">
+        <div id="visual-layer" class="editor-style"></div>
+        
+        <textarea id="input-area" class="editor-style" spellcheck="false" placeholder="Type 'color' to see the effect..."></textarea>
+    </div>
+
+    <script>
+        const input = document.getElementById('input-area');
+        const visual = document.getElementById('visual-layer');
+
+        input.addEventListener('input', () => {
+            let text = input.value;
+
+            // Simple JS logic: Color the word "color" or "js"
+            // You can change this regex to target any specific pattern
+            const highlightedText = text.replace(/(color|js|important)/gi, (match) => {
+                return `<span class="colored-text">${match}</span>`;
+            });
+
+            visual.innerHTML = highlightedText;
+        });
+
+        // Sync scrolling
+        input.addEventListener('scroll', () => {
+            visual.scrollTop = input.scrollTop;
+        });
+    </script>
+</body>
+</html>
