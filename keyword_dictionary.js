@@ -1,4 +1,4 @@
-synthaxDB = {
+export const synthaxDB = {
   "events": [
     "join",
     "quit",
