@@ -1,6 +1,6 @@
 const synthaxDB = {
   events: [
-    "onjoin","on quit","on death","on respawn",
+    "on join","on quit","on death","on respawn",
     "on block break","on block place","on interact","on click","on consume","on pickup",
     "on craft","on smelt","on chat","on move",
     "on world change","on changed world",
