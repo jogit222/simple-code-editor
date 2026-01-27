@@ -68,4 +68,4 @@ function updateEditor() {
 }
 
 
-input.addEventListener('keypress', updateEditor);
+input.addEventListener('keydown', updateEditor);
