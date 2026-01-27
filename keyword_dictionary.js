@@ -1,27 +1,26 @@
 const synthaxDB = {
   events: [
-    "join","quit","death","respawn","click","break","place","interact","consume","pickup","craft","smelt","chat","move","world change","gamemode change","exp change","level up",
-    "damage","heal","shoot","projectile hit","entity spawn","entity death","entity target","entity tame","entity breed","entity explode",
-    "block burn","block fade","block grow","block spread","block ignite","block decay","block physics",
-    "inventory open","inventory close","inventory click","inventory drag",
-    "item drop","item merge","item despawn",
-    "player kick","player ban","player unban","player bed enter","player bed leave","player fish","player teleport","player portal","player command",
-    "server start","server stop","server reload",
-    "weather change","thunder change","time change",
-    "world load","world unload","chunk load","chunk unload",
-    "redstone change","piston extend","piston retract","hopper pickup","hopper move",
-    "sign change","map initialize","book edit","anvil prepare","brewing start","brewing finish","furnace burn","furnace smelt","furnace extract",
-    "enchant item","prepare item craft","prepare anvil","trade select","villager acquire trade",
-    "raid trigger","raid finish","bell ring","lightning strike","structure grow",
-    "note play","jukebox play","jukebox stop",
-    "dragon egg teleport","wither spawn","portal create","portal travel",
-    "vehicle enter","vehicle exit","vehicle move","vehicle collide","vehicle destroy"
+    "on join","on quit","on death","on respawn",
+    "on block break","on block place","on interact","on click","on consume","on pickup",
+    "on craft","on smelt","on chat","on move",
+    "on world change","on changed world",
+    "on gamemode change","on exp change","on level up",
+    "on damage","on heal","on shoot","on projectile hit",
+    "on entity spawn","on entity death","on entity target",
+    "on block burn","on block fade","on block grow","on block spread",
+    "on inventory open","on inventory close","on inventory click",
+    "on item drop","on item despawn",
+    "on player kick","on player bed enter","on player bed leave",
+    "on player fish","on player teleport","on player portal",
+    "on server start","on server stop",
+    "on weather change","on thunder change","on time change",
+    "on world load","on world unload","on chunk load","on chunk unload"
   ],
 
   functions: [
     "send","broadcast","kill","teleport","set","add","remove","clear","give","take","drop","spawn",
     "strike lightning","make","delete","stop","cancel event","damage","heal",
-    "set health","set max health","feed","poison","ignite","extinguish",
+    "feed","poison","ignite","extinguish",
     "push","pull","launch","apply potion effect","remove potion effect",
     "equip","unequip","enchant","repair","set name","set lore","set durability","trigger",
 
@@ -29,8 +28,8 @@ const synthaxDB = {
     "set level","add level","reset level","set food","add food",
     "clear effects","play sound","stop sound","show title","show subtitle","clear title",
     "send actionbar","spawn particle","set weather","set time","add time",
-    "set difficulty","set spawn","teleport all","heal all","damage all","kill all",
-    "log"
+    "set difficulty","set spawn",
+    "log","broadcast"
   ],
 
   conditions: [
@@ -42,16 +41,13 @@ const synthaxDB = {
     "online","offline","op","banned","whitelisted",
     "empty","full",
     "and","or","not","isn't",
-
-    "near","visible","raining","thundering","daytime","nighttime",
-    "creative","survival","adventure","spectator",
-    "moving","stationary"
+    "near","visible","raining","thundering","daytime","nighttime"
   ],
 
   effects: [
     "send","broadcast","kill","teleport","set","add","remove","clear","give","take","drop","spawn",
     "strike lightning","make","delete","stop","cancel event","damage","heal",
-    "set health","set max health","feed","poison","ignite","extinguish",
+    "feed","poison","ignite","extinguish",
     "push","pull","launch","apply potion effect","remove potion effect",
     "equip","unequip","enchant","repair","set name","set lore","set durability",
 
@@ -59,7 +55,7 @@ const synthaxDB = {
     "set level","add level","reset level","set food","add food",
     "clear effects","play sound","stop sound","show title","show subtitle","clear title",
     "send actionbar","spawn particle","set weather","set time","add time",
-    "set difficulty","set spawn","teleport all","heal all","damage all","kill all"
+    "set difficulty","set spawn"
   ],
 
   expressions: [
@@ -73,7 +69,7 @@ const synthaxDB = {
     "gamemode","health","max health","food level","level","experience",
     "target","passengers","vehicle","velocity","fall distance","fire ticks",
     "time","weather","difficulty","spawn point","bed","first join",
-    "money","balance","permissions","groups","prefix","suffix",
+    "permissions",
     "display name","tab list name",
     "scoreboard","teams",
     "command","console",
@@ -81,7 +77,8 @@ const synthaxDB = {
     "radius","region","chunk","biome",
 
     "uuid","ip","ping",
-    "playtime","kills","deaths"
+    "playtime","kills","deaths",
+    "arg-1","arg-2"
   ],
 
   types: {
@@ -135,17 +132,17 @@ const synthaxDB = {
     ],
 
     items: [
-      "stick","string","feather","gunpowder","leather","paper","book",
-      "slimeball","bone","ink sac","glow ink sac","honeycomb","honey bottle",
-      "flint","coal","charcoal","iron ingot","gold ingot","netherite ingot",
-      "diamond","emerald","lapis lazuli","redstone dust","quartz",
+      "stick","sticks","string","strings","feather","feathers","gunpowder","leather","paper","book","books",
+      "slimeball","slimeballs","bone","bones","ink sac","ink sacs","glow ink sac","glow ink sacs","honeycomb","honey bottle",
+      "flint","coal","charcoal","iron ingot","iron ingots","gold ingot","gold ingots","netherite ingot","netherite ingots",
+      "diamond","diamonds","emerald","emeralds","lapis lazuli","redstone dust","quartz",
 
       "wooden sword","stone sword","iron sword","diamond sword","golden sword","netherite sword",
       "wooden pickaxe","stone pickaxe","iron pickaxe","diamond pickaxe","golden pickaxe","netherite pickaxe",
       "wooden axe","stone axe","iron axe","diamond axe","golden axe","netherite axe",
       "wooden shovel","stone shovel","iron shovel","diamond shovel","golden shovel","netherite shovel",
       "wooden hoe","stone hoe","iron hoe","diamond hoe","golden hoe","netherite hoe",
-      "bow","crossbow","trident","shield","flint and steel","fishing rod",
+      "bow","bows","crossbow","crossbows","trident","tridents","shield","shields","flint and steel","fishing rod",
 
       "leather helmet","leather chestplate","leather leggings","leather boots",
       "chainmail helmet","chainmail chestplate","chainmail leggings","chainmail boots",
@@ -154,24 +151,27 @@ const synthaxDB = {
       "golden helmet","golden chestplate","golden leggings","golden boots",
       "netherite helmet","netherite chestplate","netherite leggings","netherite boots",
 
-      "apple","golden apple","enchanted golden apple","bread","carrot","potato",
-      "baked potato","beetroot","beetroot soup","cookie","cake","pumpkin pie",
+      "apple","apples","golden apple","enchanted golden apple","bread","carrot","potato",
+      "baked potato","beetroot","beetroot soup","cookie","cookies","cake","pumpkin pie",
       "melon slice","sweet berries","glow berries","chorus fruit",
       "cooked beef","cooked porkchop","cooked chicken","cooked mutton",
       "cooked cod","cooked salmon",
 
-      "bucket","water bucket","lava bucket","milk bucket","powder snow bucket",
-      "ender pearl","ender eye","blaze rod","blaze powder","nether star",
-      "elytra","totem of undying","spyglass","bundle","brush"
+      "bucket","buckets","water bucket","lava bucket","milk bucket","powder snow bucket",
+      "ender pearl","ender pearls","ender eye","ender eyes","blaze rod","blaze rods",
+      "blaze powder","nether star","elytra","totem of undying","spyglass","bundle","brush"
     ],
 
     potions: [
-      "speed","slowness","haste","mining fatigue","strength","instant health",
-      "instant damage","jump boost","nausea","regeneration","resistance",
-      "fire resistance","water breathing","invisibility","blindness",
-      "night vision","hunger","weakness","poison","wither",
-      "health boost","absorption","saturation","glowing","levitation",
-      "luck","unluck","slow falling","conduit power","dolphins grace","bad omen"
+      "speed potion","slowness potion","haste potion","mining fatigue potion",
+      "strength potion","healing potion","harming potion","jump boost potion",
+      "nausea potion","regeneration potion","resistance potion",
+      "fire resistance potion","water breathing potion","invisibility potion",
+      "blindness potion","night vision potion","hunger potion","weakness potion",
+      "poison potion","wither potion","health boost potion","absorption potion",
+      "saturation potion","glowing potion","levitation potion",
+      "luck potion","unluck potion","slow falling potion",
+      "conduit power potion","dolphins grace potion","bad omen potion"
     ],
 
     enchantments: [
@@ -186,10 +186,9 @@ const synthaxDB = {
     misc: []
   },
 
+  sections: ["if","else if","else","while","loop"],
 
-  sections: ["if","else if","else","while","loop","for","foreach","switch","case","default"],
-
-  structures: ["if","else if","else","while","loop","function","event","command","task"],
+  structures: ["function","event","command","options","variables"],
 
   misc: [
     "wait","exit","continue","return","options","variables",
