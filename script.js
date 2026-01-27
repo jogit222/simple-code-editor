@@ -12,10 +12,10 @@ const itemColor = '#8f10b5';
 const miscColor = '#606361';
 
 
-function updateEditor()    {
+/*function updateEditor()    {
     visual.innerHTML = ''
-    const words = input.value.split(' ');
-    for (const item of words)   {
+    const words = input.value;
+    for (const item in words.split(' ')   {
         if (synthaxDB.events.includes(item))  {
             console.log('x')
             visual.innerHTML += `<span style="color: ${eventColor}">${item}</span>`;
@@ -23,8 +23,35 @@ function updateEditor()    {
     }
 }
 
+*/
+function updateEditor() {
+    // 1. Sort by length: "on join" (7 chars) comes before "on" (2 chars)
+    const sortedEvents = [...synthaxDB.events].sort((a, b) => b.length - a.length);
 
+    // 2. Escape special characters and add Word Boundaries (\b)
+    // This turns "on join" into "\bon join\b"
+    const patternString = sortedEvents
+        .map(e => `\\b${e.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&')}\\b`)
+        .join('|');
 
+    const pattern = new RegExp(`(${patternString})`, 'g');
+
+    // 3. Split the input. The () in the Regex keeps the matches in the array.
+    const parts = input.value.split(pattern);
+
+    let finalHTML = '';
+    for (const chunk of parts) {
+        // We check if the chunk (trimmed) exists in our original DB
+        if (synthaxDB.events.includes(chunk)) {
+            finalHTML += `<span style="color: ${eventColor}">${chunk}</span>`;
+        } else {
+            // This handles normal text, spaces, and newlines
+            finalHTML += chunk;
+        }
+    }
+
+    visual.innerHTML = finalHTML;
+}
 
 
 input.addEventListener('keyup', updateEditor);
