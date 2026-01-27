@@ -441,4 +441,3 @@ const synthaxDB = {
     "days"
   ]
 }
-module.exports = synthaxDB;
