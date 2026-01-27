@@ -24,6 +24,7 @@
         /* Shared styling for both elements to ensure alignment */
         .editor-style {
             position: absolute;
+            z-index: 2;
             top: 0; left: 0; width: 100%; height: 100%;
             padding: 40px;
             font-size: 20px;
@@ -41,7 +42,7 @@
             background: transparent;
             color: gray; /* Hide the actual text */
             caret-color: white; /* Show only the blinking cursor */
-            z-index: 2;
+            z-index: 1;
             outline: none;
             resize: none;
         }
