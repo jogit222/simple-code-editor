@@ -6,7 +6,7 @@ const expressionColor = '#22c93b';
 const effectColor = '#102eb5';
 const conditionColor = '#e3b922';
 const structureColor = '#147d78';
-const sectionsColor = '#12b39a';
+const sectionColor = '#12b39a';
 const functionColor = '#a8a8a8';
 const itemColor = '#8f10b5';
 const miscColor = '#606361';
@@ -44,6 +44,10 @@ function updateEditor() {
         // We check if the chunk (trimmed) exists in our original DB
         if (synthaxDB.events.includes(chunk)) {
             finalHTML += `<span style="color: ${eventColor}">${chunk}</span>`;
+        } else if (synthaxDB.structures.includes(chunk))   {
+            finalHTML += `<span style="color: ${strucureColor}">${chunk}</span>`;
+        } else if (synthaxDB.sections.includes(chunk))   {
+            finalHTML += `<span style="color: ${sectionColor}">${chunk}</span>`;
         } else {
             // This handles normal text, spaces, and newlines
             finalHTML += chunk;
