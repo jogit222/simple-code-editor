@@ -64,4 +64,4 @@ function updateEditor() {
 }
 
 
-input.addEventListener('keyup', updateEditor);
+input.addEventListener('keydown', updateEditor);
