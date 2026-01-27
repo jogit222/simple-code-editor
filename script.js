@@ -11,6 +11,10 @@ const functionColor = '#a8a8a8';
 const itemColor = '#8f10b5';
 const miscColor = '#606361';
 
+/*const delay = (delayInms) => {
+  return new Promise(resolve => setTimeout(resolve, delayInms));
+};
+*/
 
 /*function updateEditor()    {
     visual.innerHTML = ''
@@ -64,4 +68,4 @@ function updateEditor() {
 }
 
 
-input.addEventListener('keydown', updateEditor);
+input.addEventListener('keypress', updateEditor);
