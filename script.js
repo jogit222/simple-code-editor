@@ -52,6 +52,8 @@ function updateEditor() {
             finalHTML += `<span style="color: ${conditionColor}">${chunk}</span>`;
         } else if (synthaxDB.functions.includes(chunk))   {
             finalHTML += `<span style="color: ${functionColor}">${chunk}</span>`;
+        } else if (synthaxDB.expressions.includes(chunk))   {
+            finalHTML += `<span style="color: ${expressionColor}">${chunk}</span>`;
         } else {
             // This handles normal text, spaces, and newlines
             finalHTML += chunk;
