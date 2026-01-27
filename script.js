@@ -48,6 +48,10 @@ function updateEditor() {
             finalHTML += `<span style="color: ${strucureColor}">${chunk}</span>`;
         } else if (synthaxDB.sections.includes(chunk))   {
             finalHTML += `<span style="color: ${sectionColor}">${chunk}</span>`;
+        } else if (synthaxDB.conditions.includes(chunk))   {
+            finalHTML += `<span style="color: ${conditionColor}">${chunk}</span>`;
+        } else if (synthaxDB.functions.includes(chunk))   {
+            finalHTML += `<span style="color: ${functionColor}">${chunk}</span>`;
         } else {
             // This handles normal text, spaces, and newlines
             finalHTML += chunk;
