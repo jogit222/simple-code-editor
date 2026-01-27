@@ -15,7 +15,7 @@ const miscColor = '#606361';
 function updateEditor()    {
     const words = input.value.split(' ');
     for (const item in words)   {
-        if (synthaxDB.events.contains('$item'))  {
+        if (synthaxDB.events.includes('$item'))  {
             visual.innerHTML += '<span style="color: ${eventColor}">${item}</span>';
         }
     }
