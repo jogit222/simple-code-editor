@@ -38,7 +38,7 @@
 
         /* The actual typing area */
         #input-area {
-            background: transparent;
+            background: var(--bg);
             color: gray; /* Hide the actual text */
             caret-color: white; /* Show only the blinking cursor */
             z-index: 1;
@@ -48,7 +48,7 @@
 
         /* The visual layer underneath */
         #visual-layer {
-            background: var(--bg);
+            background: transparent;
             color: #666; /* Default text color */
             z-index: 2;
             pointer-events: none;
