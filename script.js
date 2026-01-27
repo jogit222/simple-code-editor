@@ -29,38 +29,49 @@ const miscColor = '#606361';
 
 */
 function updateEditor() {
-    // 1. Sort by length: "on join" (7 chars) comes before "on" (2 chars)
-    const sortedEvents = [...synthaxDB.events].sort((a, b) => b.length - a.length);
+    // 1. Combine all categories into one flat list for the Regex
+    const allKeywords = [
+        ...synthaxDB.events, 
+        ...synthaxDB.structures, 
+        ...synthaxDB.sections, 
+        ...synthaxDB.conditions, 
+        ...synthaxDB.functions, 
+        ...synthaxDB.expressions
+    ];
 
-    // 2. Escape special characters and add Word Boundaries (\b)
-    // This turns "on join" into "\bon join\b"
-    const patternString = sortedEvents
-        .map(e => `\\b${e.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&')}\\b`)
+    // 2. Sort by length (longest first) to prioritize "on join" over "on"
+    const sortedKeywords = allKeywords.sort((a, b) => b.length - a.length);
+
+    // 3. Create the pattern WITHOUT \b if you have special symbols.
+    // We use a "Lookahead/Lookbehind" simulation or just plain matching.
+    const patternString = sortedKeywords
+        .map(e => e.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&'))
         .join('|');
 
+    // If your keywords are strictly alphanumeric, use: `(\\b${e}\\b)`
+    // If they have symbols, use the raw string as shown below:
     const pattern = new RegExp(`(${patternString})`, 'g');
 
-    // 3. Split the input. The () in the Regex keeps the matches in the array.
     const parts = input.value.split(pattern);
 
     let finalHTML = '';
     for (const chunk of parts) {
-        // We check if the chunk (trimmed) exists in our original DB
+        // Map the chunk to its color based on which category it lives in
         if (synthaxDB.events.includes(chunk)) {
             finalHTML += `<span style="color: ${eventColor}">${chunk}</span>`;
-        } else if (synthaxDB.structures.includes(chunk))   {
+        } else if (synthaxDB.structures.includes(chunk)) {
             finalHTML += `<span style="color: ${strucureColor}">${chunk}</span>`;
-        } else if (synthaxDB.sections.includes(chunk))   {
+        } else if (synthaxDB.sections.includes(chunk)) {
             finalHTML += `<span style="color: ${sectionColor}">${chunk}</span>`;
-        } else if (synthaxDB.conditions.includes(chunk))   {
+        } else if (synthaxDB.conditions.includes(chunk)) {
             finalHTML += `<span style="color: ${conditionColor}">${chunk}</span>`;
-        } else if (synthaxDB.functions.includes(chunk))   {
+        } else if (synthaxDB.functions.includes(chunk)) {
             finalHTML += `<span style="color: ${functionColor}">${chunk}</span>`;
-        } else if (synthaxDB.expressions.includes(chunk))   {
+        } else if (synthaxDB.expressions.includes(chunk)) {
             finalHTML += `<span style="color: ${expressionColor}">${chunk}</span>`;
         } else {
-            // This handles normal text, spaces, and newlines
-            finalHTML += chunk;
+            // Preserve newlines and spaces accurately
+            finalHTML += chunk.replace(/\n/g, '<br>');
         }
     }
 
