@@ -31,15 +31,15 @@ const miscColor = '#606361';
 function updateEditor() {
     // 1. Combine all categories into one flat list for the Regex
     const allKeywords = [
-        ...synthaxDB.events, 
-        ...synthaxDB.structures, 
-        ...synthaxDB.sections, 
-        ...synthaxDB.conditions, 
-        ...synthaxDB.functions, 
-        ...synthaxDB.expressions,
-        ...synthaxDB.effects,
-        ...synthaxDB.types,
-        ...synthaxDB.misc
+        synthaxDB.events, 
+        synthaxDB.structures, 
+        synthaxDB.sections, 
+        synthaxDB.conditions, 
+        synthaxDB.functions, 
+        synthaxDB.expressions,
+        synthaxDB.effects,
+        synthaxDB.types,
+        synthaxDB.misc
     ];
 
     // 2. Sort by length (longest first) to prioritize "on join" over "on"
