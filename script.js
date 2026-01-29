@@ -36,7 +36,10 @@ function updateEditor() {
         ...synthaxDB.sections, 
         ...synthaxDB.conditions, 
         ...synthaxDB.functions, 
-        ...synthaxDB.expressions
+        ...synthaxDB.expressions,
+        ...synthaxDB.effects,
+        ...synthaxDB.types,
+        ...synthaxDB.misc
     ];
 
     // 2. Sort by length (longest first) to prioritize "on join" over "on"
@@ -69,6 +72,14 @@ function updateEditor() {
             finalHTML += `<span style="color: ${functionColor}">${chunk}</span>`;
         } else if (synthaxDB.expressions.includes(chunk)) {
             finalHTML += `<span style="color: ${expressionColor}">${chunk}</span>`;
+        } else if (synthaxDB.effects.includes(chunk)) {
+            finalHTML += `<span style="color: ${effectColor}">${chunk}</span>`;
+        } else if (synthaxDB.item.includes(chunk)) {
+            finalHTML += `<span style="color: ${itemColor}">${chunk}</span>`;
+        } else if (synthaxDB.misc.includes(chunk)) {
+            finalHTML += `<span style="color: ${miscColor}">${chunk}</span>`;
+
+
         } else {
             // Preserve newlines and spaces accurately
             finalHTML += chunk.replace(/\n/g, '<br>');
