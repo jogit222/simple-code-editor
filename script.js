@@ -29,37 +29,37 @@ const miscColor = '#606361';
 
 */
 function updateEditor() {
-    // 1. Combine all categories into one flat list for the Regex
-    const allKeywords = [
-        synthaxDB.events, 
-        synthaxDB.structures, 
-        synthaxDB.sections, 
-        synthaxDB.conditions, 
-        synthaxDB.functions, 
-        synthaxDB.expressions,
-        synthaxDB.effects,
-        synthaxDB.types,
-        synthaxDB.misc
-    ];
+    // 1. Flatten the types object into a single array of strings
+    const typeKeywords = Object.values(synthaxDB.types).flat();
 
-    // 2. Sort by length (longest first) to prioritize "on join" over "on"
+    const allKeywords = [
+        ...synthaxDB.events, 
+        ...synthaxDB.structures, 
+        ...synthaxDB.sections, 
+        ...synthaxDB.conditions, 
+        ...synthaxDB.functions, 
+        ...synthaxDB.expressions,
+        ...synthaxDB.effects,
+        ...typeKeywords, // Use the flattened list here
+        ...synthaxDB.misc
+    ].filter(e => typeof e === 'string'); // Safety check
+
+    // 2. Sort by length (longest first)
     const sortedKeywords = allKeywords.sort((a, b) => b.length - a.length);
 
-    // 3. Create the pattern WITHOUT \b if you have special symbols.
-    // We use a "Lookahead/Lookbehind" simulation or just plain matching.
+    // 3. Create pattern
     const patternString = sortedKeywords
         .map(e => e.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&'))
         .join('|');
 
-    // If your keywords are strictly alphanumeric, use: `(\\b${e}\\b)`
-    // If they have symbols, use the raw string as shown below:
     const pattern = new RegExp(`(${patternString})`, 'g');
-
     const parts = input.value.split(pattern);
 
     let finalHTML = '';
     for (const chunk of parts) {
-        // Map the chunk to its color based on which category it lives in
+        if (!chunk) continue;
+
+        // Check categories (Note: use typeKeywords for the check)
         if (synthaxDB.events.includes(chunk)) {
             finalHTML += `<span style="color: ${eventColor}">${chunk}</span>`;
         } else if (synthaxDB.structures.includes(chunk)) {
@@ -74,20 +74,23 @@ function updateEditor() {
             finalHTML += `<span style="color: ${expressionColor}">${chunk}</span>`;
         } else if (synthaxDB.effects.includes(chunk)) {
             finalHTML += `<span style="color: ${effectColor}">${chunk}</span>`;
-        } else if (synthaxDB.types.includes(chunk)) {
+        } else if (typeKeywords.includes(chunk)) { // Corrected check
             finalHTML += `<span style="color: ${itemColor}">${chunk}</span>`;
         } else if (synthaxDB.misc.includes(chunk)) {
             finalHTML += `<span style="color: ${miscColor}">${chunk}</span>`;
-
-
         } else {
-            // Preserve newlines and spaces accurately
-            finalHTML += chunk.replace(/\n/g, '<br>');
+            // Escape special HTML characters and handle newlines
+            finalHTML += chunk
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/\n/g, '<br>');
         }
     }
 
     visual.innerHTML = finalHTML;
 }
+
 
 
 input.addEventListener('input', updateEditor);
