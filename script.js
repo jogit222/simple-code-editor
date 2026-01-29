@@ -74,7 +74,7 @@ function updateEditor() {
             finalHTML += `<span style="color: ${expressionColor}">${chunk}</span>`;
         } else if (synthaxDB.effects.includes(chunk)) {
             finalHTML += `<span style="color: ${effectColor}">${chunk}</span>`;
-        } else if (synthaxDB.item.includes(chunk)) {
+        } else if (synthaxDB.types.includes(chunk)) {
             finalHTML += `<span style="color: ${itemColor}">${chunk}</span>`;
         } else if (synthaxDB.misc.includes(chunk)) {
             finalHTML += `<span style="color: ${miscColor}">${chunk}</span>`;
