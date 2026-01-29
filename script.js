@@ -63,7 +63,7 @@ function updateEditor() {
         if (synthaxDB.events.includes(chunk)) {
             finalHTML += `<span style="color: ${eventColor}">${chunk}</span>`;
         } else if (synthaxDB.structures.includes(chunk)) {
-            finalHTML += `<span style="color: ${strucureColor}">${chunk}</span>`;
+            finalHTML += `<span style="color: ${structureColor}">${chunk}</span>`;
         } else if (synthaxDB.sections.includes(chunk)) {
             finalHTML += `<span style="color: ${sectionColor}">${chunk}</span>`;
         } else if (synthaxDB.conditions.includes(chunk)) {
